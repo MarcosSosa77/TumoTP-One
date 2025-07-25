@@ -59,9 +59,9 @@ if (totalBlocks < 10) {
 // Revisa qué bloques clave faltan
 const missingTypes = [];
 
-if (blockCounts['Stone'] === 0) missingTypes.push("Stone");
-if (blockCounts['Death'] === 0) missingTypes.push("Death");
-if (blockCounts['Sand'] === 0) missingTypes.push("Sand");
+if (blockCounts['Stone'] === 0) missingTypes.push("Piedras");
+if (blockCounts['Death'] === 0) missingTypes.push("Pinchos");
+if (blockCounts['Sand'] === 0) missingTypes.push("Arena");
 
 if (blockCounts['Vertical'] === 0 && blockCounts['Horizontal'] === 0) {
   missingTypes.push("Horizontal o Vertical");
