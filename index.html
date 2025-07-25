@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Redireccionar y Decodificar Código</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Redireccionador y Decodificador de Códigos</h1>
+  <p>Pega aquí tu código y se abrirá la página correspondiente en una pestaña nueva. También se decodificará y mostrará los bloques en varias tablas.</p>
+  <textarea id="codeInput" placeholder="Pega aquí tu código..."></textarea><br>
+  <button id="decodeButton">Redirigir y Decodificar</button>
+  <button id="decodeOnly">Decodificar</button>
+  <button id="redirectOnly">Redirigir</button>
+
+  <div id="blocksTableContainer" style="display: none;">
+    <h2>Tablas Generadas</h2>
+
+    
+        
+        <h3>1. Verificación de Tipos de Bloques</h3>
+        <table id="typesCheckTable">
+          <thead>
+            <tr>
+              <th>Bloque</th>
+              <th>Está presente</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+    
+        <h3>2. Conteo de Bloques</h3>
+        <table id="blockCountTable">
+          <thead>
+            <tr>
+              <th>Tipo de Bloque</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+
+ 
+
+
+
+    <!-- Tercera Tabla: JSON Crudo -->
+    <h3>3. JSON Crudo</h3>
+    <table id="rawJsonTable">
+      <thead>
+        <tr>
+          <th>Clave</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="index.js"></script>
+
+
+</body>
+</html>
