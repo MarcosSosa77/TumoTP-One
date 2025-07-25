@@ -31,6 +31,9 @@
                                   (blockCounts['Vertical'] > 0 || blockCounts['Horizontal'] > 0) && 
                                   jsonData.hasOwnProperty('coins');
 
+
+
+    /*
     // Generamos el mensaje de retroalimentación en función de las condiciones
     let feedbackMessage = '';
 
@@ -43,6 +46,44 @@
     } else {
       feedbackMessage = "Buen trabajo, intenta para la próxima variar un poco la selección de bloques, además de extender la duración del nivel.";
     }
+
+    */
+
+    let feedbackMessage = "Buen trabajo.";
+let additionalMessages = [];
+
+if (totalBlocks < 10) {
+  additionalMessages.push("Intentá extender la duración del nivel (agregá más bloques).");
+}
+
+// Revisa qué bloques clave faltan
+const missingTypes = [];
+
+if (blockCounts['Stone'] === 0) missingTypes.push("Stone");
+if (blockCounts['Death'] === 0) missingTypes.push("Death");
+if (blockCounts['Sand'] === 0) missingTypes.push("Sand");
+
+if (blockCounts['Vertical'] === 0 && blockCounts['Horizontal'] === 0) {
+  missingTypes.push("Horizontal o Vertical");
+}
+
+if (!jsonData.hasOwnProperty('coins') || blockCounts['Coins'] === 0) {
+  missingTypes.push("Coins");
+}
+
+if (missingTypes.length > 0) {
+  additionalMessages.push("Faltan bloques del tipo: " + missingTypes.join(", ") + ".");
+} else if (totalBlocks >= 10) {
+  feedbackMessage = "Buen trabajo, me gustó mucho la progresión de la dificultad. ¡Felicitaciones!";
+}
+
+if (additionalMessages.length > 0) {
+  feedbackMessage += " " + additionalMessages.join(" ");
+}
+
+
+    const oldFeedback = document.querySelector('.feedback-container');
+    if (oldFeedback) oldFeedback.remove();
 
     // Mostrar el mensaje de retroalimentación con el botón para copiar al portapapeles
     const feedbackContainer = document.createElement('div');
@@ -139,10 +180,10 @@ document.getElementById('blocksTableContainer').style.display = 'block';
 // 6. Generar retroalimentación
 generateFeedback(jsonData);
 
-showTypesCheckTable(jsonData);
-showBlockCountTable(jsonData);
+//showTypesCheckTable(jsonData);
+//showBlockCountTable(jsonData);
 
-
+showCombinedBlockTable(jsonData);
 
 showRawJsonTable(jsonData);
 }
@@ -161,7 +202,7 @@ window.open(fullUrl, '_blank'); // Abre en pestaña nueva
 }
 
 
-
+/*
   
   function showTypesCheckTable(jsonData) {
     const requiredTypes = ['Vertical', 'Horizontal', 'Stone', 'Death', 'Sand'];
@@ -239,9 +280,6 @@ window.open(fullUrl, '_blank'); // Abre en pestaña nueva
     });
 
 
-
-    
-
     const tableBody = document.querySelector('#blockCountTable tbody');
     tableBody.innerHTML = ''; // Limpiar la tabla antes de llenarla
 
@@ -284,6 +322,94 @@ window.open(fullUrl, '_blank'); // Abre en pestaña nueva
     finalTotalRow.innerHTML = `<td><strong>Total (normal + COINS + CUP)</strong></td><td>${totalNormalBlocks + blockCounts['Coins'] + blockCounts['Cup']}</td>`;
     tableBody.appendChild(finalTotalRow);
   }
+
+
+  */
+
+
+//-----------MCS-------------------
+function showCombinedBlockTable(jsonData) {
+    const requiredTypes = ['Vertical', 'Horizontal', 'Stone', 'Death', 'Sand'];
+    const typesPresence = {};
+    const blockCounts = {
+      'Vertical': 0,
+      'Horizontal': 0,
+      'Stone': 0,
+      'Death': 0,
+      'Sand': 0
+    };
+  
+    // Inicializar
+    requiredTypes.forEach(type => {
+      typesPresence[type] = false;
+      blockCounts[type] = 0;
+    });
+  
+    // Recorrer los bloques
+    jsonData.blocks.forEach(block => {
+      if (requiredTypes.includes(block.type)) {
+        typesPresence[block.type] = true;
+        blockCounts[block.type]++;
+      }
+    });
+  
+    // Cup y Coins
+    const hasCup = jsonData.hasOwnProperty('Cup') && Array.isArray(jsonData.Cup);
+    const hasCoins = jsonData.hasOwnProperty('coins') && Array.isArray(jsonData.coins);
+    const cupCount = hasCup ? jsonData.Cup.length : 0;
+    const coinsCount = hasCoins ? jsonData.coins.length : 0;
+  
+    const allBlocksPresent = requiredTypes.every(type => typesPresence[type]) && hasCup && hasCoins;
+    const statusEmoji = allBlocksPresent ? '👍' : '👎';
+  
+    const tableBody = document.querySelector('#combinedTable tbody');
+    tableBody.innerHTML = ''; // Limpiar
+  
+    // Agregar filas de tipos requeridos
+    requiredTypes.forEach(type => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${type}</td>
+        <td>${typesPresence[type] ? '👍' : '👎'}</td>
+        <td>${blockCounts[type]}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  
+    // Agregar fila Cup
+    const cupRow = document.createElement('tr');
+    cupRow.innerHTML = `
+      <td>Cup</td>
+      <td>${hasCup ? '👍' : '👎'}</td>
+      <td>${cupCount}</td>
+    `;
+    tableBody.appendChild(cupRow);
+  
+    // Agregar fila Coins
+    const coinsRow = document.createElement('tr');
+    coinsRow.innerHTML = `
+      <td>Coins</td>
+      <td>${hasCoins ? '👍' : '👎'}</td>
+      <td>${coinsCount}</td>
+    `;
+    tableBody.appendChild(coinsRow);
+  
+    // Agregar fila de estado general
+    const statusRow = document.createElement('tr');
+    statusRow.innerHTML = `
+      <td><strong>Todo Presente</strong></td>
+      <td colspan="2">${statusEmoji}</td>
+    `;
+    tableBody.appendChild(statusRow);
+  }
+  
+
+    //-----------MCS-------------------
+
+
+
+
+
 
   function showRawJsonTable(jsonData) {
 const container = document.getElementById('rawJsonTable');

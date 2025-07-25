@@ -2,8 +2,8 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 50px;
-    background-color: #fff5f5;
-    color: #6b0000;
+    background-color: #f5feff;
+    color: #253ab1;
   }
 
   textarea {
@@ -11,16 +11,16 @@ body {
     height: 150px;
     margin-bottom: 20px;
     font-family: monospace;
-    border: 1px solid #cc0000;
-    background-color: #fff0f0;
-    color: #6b0000;
+    border: 1px solid #0092cc;
+    background-color: #96e1ff;
+    color: #1600e0;
     padding: 10px;
   }
 
   button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #cc0000;
+    background-color: #061e8a;
     color: white;
     border: none;
     border-radius: 4px;
@@ -29,43 +29,44 @@ body {
   }
 
   button:hover {
-    background-color: #a30000;
+    background-color: #00d9ff;
+    color:#061e8a;
   }
 
   table {
     width: 80%;
     margin-top: 20px;
     border-collapse: collapse;
-    background-color: #ffe5e5;
-    color: #6b0000;
+    background-color: #e5f8ff;
+    color: #061e8a;
   }
 
   th, td {
     padding: 10px;
-    border: 1px solid #cc0000;
+    border: 1px solid #0069cc;
     text-align: left;
   }
 
   th {
-    background-color: #ffcccc;
+    background-color: #ccf9ff;
   }
 
   pre {
     text-align: left;
-    background-color: #ffe5e5;
+    background-color: #ffffff;
     padding: 20px;
     width: 80%;
     margin-top: 20px;
-    color: #6b0000;
+    color: #00026b;
   }
 
   .feedback-container {
-    background-color: #ffe5e5;
-    border: 2px solid #cc0000;
+    background-color: #e5fdff;
+    border: 2px solid #1f00cc;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 5px;
-    color: #6b0000;
+    color: #0b006b;
   }
 
   .feedback-message h3 {
@@ -74,7 +75,7 @@ body {
 
   .copy-button {
     margin-top: 10px;
-    background-color: #cc0000;
+    background-color: #2500cc;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -83,15 +84,15 @@ body {
   }
 
   .copy-button:hover {
-    background-color: #a30000;
+    background-color: #0b00a3;
   }
 
   h1, h2, h3 {
-    color: #990000;
+    color: #001c99;
   }
 
   hr {
     border: 0;
-    border-top: 2px solid #cc0000;
+    border-top: 2px solid #0003cc;
     margin: 20px 0;
   }
